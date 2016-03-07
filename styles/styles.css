@@ -1,0 +1,60 @@
+*{
+	box-sizing: border-box;
+}
+
+
+.align-children{
+	font-size: 0;
+}
+
+.align-children > * {
+	display: inline-block;
+	vertical-align: top;
+	font-size: medium;
+}
+
+.title{
+	text-align: center;
+	font-size: 30px;
+}
+
+.nav-container{
+	text-align: center; /*centered buttons*/
+	margin: auto;
+}
+
+
+#mainContainer{
+	/*height: 850px*/;
+	max-width: 100%;
+	border: 2px solid blue;
+	margin: auto;
+	
+}
+
+.currentForecast{
+/*	height: 350px;*/
+	max-width: 100%;
+	border: 2px solid purple;
+	margin: auto;
+	text-align: center;
+}
+
+.dailyForecast{
+	/*height: 350px;*/
+	max-width: 100%;
+	border: 2px solid green;
+	margin: auto;
+	text-align: center;
+
+}
+
+.hourlyforecast{
+	/*height: 350px;*/
+	max-width: 100%;
+	border: 2px solid yellow;
+	margin: auto;
+	text-align: center;
+
+}
+
