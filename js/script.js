@@ -1,5 +1,5 @@
 console.log('hello weather')
-
+var weatherObject_Global = null
 // current forecast
 // var currentForecastURL = "https://api.forecast.io/forecast/APIKEY/LATITUDE,LONGITUDE"
 
@@ -11,43 +11,45 @@ console.log('hello weather')
 
 //currently-------------------------------------------------------------------------------------//
 
-// var buildHTMLString_CurrentWeather = function(dataObj){
-	
-// 	var htmlString = '<div class="currentForecast">'
-// 		htmlString +=	'<h1 class="current">' + "Current Forecast" + '</h1>'
-// 		htmlString +=	'<h3 class="current">' + "temperature" + " " + dataObj.currently.temperature + '</h3>'
-// 		htmlString +=	'<h3 class="current">' + "summary" + " " + dataObj.currently.summary + '</h3>'
-// 		htmlString += 	'<h3 class="current">' + "humidity" + " " + dataObj.currently.humidity + '</h3>'
-// 		htmlString += 	'<h3 class="current">' + "pressure" + " " + dataObj.currently.pressure + '</h3>'
-// 		htmlString +=	'<h3 class="current">' + "chance of rain" + " " + dataObj.currently.precipProbability + '</h3>'
-// 		// htmlString +=	'<h3 class="current">' + "current time" + " " + dataObj.currently.time + '<h3>'
-
-// 		htmlString += '</div>'
-
-// 		return htmlString 
-// 	}
-
-
 var buildHTMLString_CurrentWeather = function(dataObj){
-	var htmlString = ''
+	
+	var htmlString = '<div class="currentForecast">'
+		htmlString +=	'<h1 class="current">' + "Current Forecast" + '</h1>'
+		htmlString +=	'<h3 class="current">' + "temperature" + " " + dataObj.currently.temperature + '</h3>'
+		htmlString +=	'<h3 class="current">' + "summary" + " " + dataObj.currently.summary + '</h3>'
+		htmlString += 	'<h3 class="current">' + "humidity" + " " + dataObj.currently.humidity + '</h3>'
+		htmlString += 	'<h3 class="current">' + "pressure" + " " + dataObj.currently.pressure + '</h3>'
+		htmlString +=	'<h3 class="current">' + "chance of rain" + " " + dataObj.currently.precipProbability + '</h3>'
+		// htmlString +=	'<h3 class="current">' + "current time" + " " + dataObj.currently.time + '<h3>'
 
-		for(var i=0; i<dataObj.currently.length; i++){
+		htmlString += '</div>'
 
-		var reportedDateTime = new Date(dataObj.hourly.data[i].time*1000)
-		var readableDateStr = reportedDateTime.getHours()-12  + ":"+ reportedDateTime.getMinutes()+"0"
+		return htmlString 
+	}
+
+
+// var buildHTMLString_CurrentWeather = function(dataObj){
+//     console.log('templlllate')
+//     console.log(dataObj)
+// 	var htmlString = ''
+
+// 		for(var i=0; i<dataObj.currently.length; i++){
+
+// 		var reportedDateTime = new Date(dataObj.hourly.data[i].time*1000)
+// 		var readableDateStr = reportedDateTime.getHours()-12  + ":"+ reportedDateTime.getMinutes()+"0"
 		
-		htmlString += '<div class ="currentForecast">'
-        htmlString += 		'<h3 class="current">' + readableDateStr + '<h3>'
-        htmlString += 		'<h3 class="current">' + "temperature" + " " + dataObj.currently.data[i].temperature + '</h3>'
-        htmlString += 		'<h3 class="current">' + "summary" + " " + dataObj.currently.data[i].summary + '</h3>'
-        htmlString += 		'<h3 class="current">' + "chance of rain" + " " + dataObj.currently.data[i].precipProbability + '</h3>'
-        htmlString += 		'<hr/>'
-        htmlString += 	 '</div>'
+// 		htmlString += '<div class ="currentForecast">'
+//         htmlString += 		'<h3 class="current">' + readableDateStr + '<h3>'
+//         htmlString += 		'<h3 class="current">' + "temperature" + " " + dataObj.currently.data[i].temperature + '</h3>'
+//         htmlString += 		'<h3 class="current">' + "summary" + " " + dataObj.currently.data[i].summary + '</h3>'
+//         htmlString += 		'<h3 class="current">' + "chance of rain" + " " + dataObj.currently.data[i].precipProbability + '</h3>'
+//         htmlString += 		'<hr/>'
+//         htmlString += 	 '</div>'
 
-		}
+// 		}
 
-	return htmlString	
-}
+// 	return htmlString	
+// }
 
 
 //end of currently---------------------------------------------------------------------------------//
@@ -55,9 +57,12 @@ var buildHTMLString_CurrentWeather = function(dataObj){
 
 
 //daily-------------------------------------------------------------------------------------------//
+//daily = weekly forcast 
 
 var buildHTMLString_DailyWeather = function(dataObj){
 	var htmlString = ''
+
+         htmlString += '<h1 class="dailyTitle">' +"Weekly Forecast" + '</h1>' 
 
 		for(var i=0; i<dataObj.daily.data.length; i++){
 
@@ -190,7 +195,9 @@ var buildHTMLString_DailyWeather = function(dataObj){
 
 var buildHTMLString_HourlyWeather = function(dataObj) {
 	var htmlString = ''
-	
+
+        htmlString += '<h1 class="hourlyTitle">' +"Hourly Forecast" + '</h1>' 
+
 	    for (var i = 0; i < dataObj.hourly.data.length; i++) {
 
     	var reportedDateTime = new Date(dataObj.hourly.data[i].time*1000)
@@ -317,15 +324,18 @@ var successCallback = function(positionObject){
 	$.getJSON(fullUrl).then(
 		function(receivedWeatherData){
 
-			var weatherObject = receivedWeatherData
+			weatherObject_Global = receivedWeatherData
 
-			// console.log(weatherObject)
+			console.log(weatherObject_Global)
 
 			// mainContainer.innerHTML = buildHTMLString_CurrentWeather(weatherObject)
 			// mainContainer.innerHTML = buildHTMLString_DailyWeather(weatherObject)
 			// mainContainer.innerHTML = buildHTMLString_HourlyWeather(weatherObject)
 
-			hourly_ForecastView.renderHTML(weatherObject)
+			// hourly_ForecastView.renderHTML(weatherObject)
+			// daily_ForecastView.renderHTML(weatherObject)
+			current_ForecastView.renderHTML(weatherObject_Global)
+
 		})
 
 }
@@ -338,7 +348,6 @@ var errorCallback = function(error){
 var apiKey = "d8a03dc60491af5fd9965e0691c2bd54"
 var baseUrl = "https://api.forecast.io/forecast/" + apiKey 
 
-navigator.geolocation.getCurrentPosition(successCallback,errorCallback)
 
 
 
@@ -352,13 +361,14 @@ var ViewConstructor = function(domEl, template_fn){
 	this._buildHTMLString = template_fn
 
 	this.renderHTML = function(inputData){
-		console.log(this._buildHTMLString)
+        console.log( this._buildHTMLString )
+
+		console.log( this._buildHTMLString(inputData) )
 		document.querySelector(this._el).innerHTML = this._buildHTMLString(inputData)
 
 	}
 
 }
-
 
 
 var handleNavClick = function(evt){
@@ -372,12 +382,29 @@ var handleNavClick = function(evt){
 //where to end
 
 var controller = function(){
-	// 	var hashVal = window.location.hash.substr(1)
+	var hashRoute = window.location.hash.substr(1) // '#hourly' => 'hourly'
+	var	hashRoute_parts = hashRoute.split("/")  // splits on '/' (there is no / so returns array of 1)
+	var	viewType = hashRoute_parts[0]  // access array of 1 ('hourly')
+		// latitude = hashRoute_parts[1],
+		// longitude = hashRoute_parts[2]
 
-	// 	if (hashVal === "weekly"){
-	// 		daily_ForecastView.renderHTML(weatherObj)
-	// 	} 
+    // var fullUrl = baseUrl + "/" + latitude + "," + longitude
+    
+    // var promise = $.getJSON(fullUrl)
+    // promise.then(showData)
+
+	if(hashRoute === "current"){
+		current_ForecastView.renderHTML(weatherObject_Global)
+	}
+	if(hashRoute === "weekly"){
+		daily_ForecastView.renderHTML(weatherObject_Global)
+	}
+	if(hashRoute === "hourly"){
+		hourly_ForecastView.renderHTML(weatherObject_Global)
+	}
+
 }
+
 
 var current_ForecastView = new ViewConstructor("#mainContainer", buildHTMLString_CurrentWeather)
 var daily_ForecastView = new ViewConstructor ("#mainContainer",   buildHTMLString_DailyWeather)
@@ -393,6 +420,7 @@ weekly_el.addEventListener("click", handleNavClick)
 
 window.addEventListener('hashchange',controller)
 
+navigator.geolocation.getCurrentPosition(successCallback,errorCallback)
 
 
 
