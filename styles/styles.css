@@ -42,19 +42,46 @@
 
 .dailyForecast{
 	/*height: 350px;*/
-	max-width: 100%;
+	max-width: 35%;
 	border: 2px solid green;
 	margin: auto;
 	text-align: center;
 
 }
 
+.dailyTitle{
+	text-align: center;
+	font-size: 20px;
+}
+
 .hourlyforecast{
 	/*height: 350px;*/
-	max-width: 100%;
+	max-width: 35%;
 	border: 2px solid yellow;
 	margin: auto;
 	text-align: center;
-
 }
+
+.hourlyTitle{
+	text-align: center;
+	font-size: 20px;
+}
+
+/* --------button-style------ */
+
+.hourly{ 	/* the button size*/
+	text-align: center;
+	font-size:18px;
+}
+
+.current{ 	/* the button size*/
+	text-align: center;
+	font-size:18px;
+}
+
+.weekly{ 	/* the button size*/
+	text-align: center;
+	font-size:18px;
+}
+
 
