@@ -18,7 +18,7 @@ var buildHTMLString_CurrentWeather = function(dataObj){
 		htmlString +=	'<h3 class="current">' + "temperature" + " " + dataObj.currently.temperature + '</h3>'
 		htmlString +=	'<h3 class="current">' + "summary" + " " + dataObj.currently.summary + '</h3>'
 		htmlString += 	'<h3 class="current">' + "humidity" + " " + dataObj.currently.humidity + '</h3>'
-		htmlString += 	'<h3 class="current">' + "pressure" + " " + dataObj.currently.pressure + '</h3>'
+		// htmlString += 	'<h3 class="current">' + "pressure" + " " + dataObj.currently.pressure + '</h3>'
 		htmlString +=	'<h3 class="current">' + "chance of rain" + " " + dataObj.currently.precipProbability + '</h3>'
 		// htmlString +=	'<h3 class="current">' + "current time" + " " + dataObj.currently.time + '<h3>'
 
@@ -71,8 +71,9 @@ var buildHTMLString_DailyWeather = function(dataObj){
 
     	htmlString += '<div class ="dailyForecast">'
         htmlString += 		'<h3 class="daily">' + readableDateStr + '<h3>'
-        htmlString += 		'<h3 class="daily">' + "temperature" + " " + dataObj.daily.data[i].temperature + '</h3>'
-        htmlString += 		'<h3 class="daily">' + "summary" + " " + dataObj.daily.data[i].summary + '</h3>'
+        htmlString += 		'<h3 class="daily">' + "Today's High" + " " + dataObj.daily.data[i].temperatureMax + '</h3>'
+        htmlString +=       '<h3 class="daily">' + "Today's Low" + " " + dataObj.daily.data[i].temperatureMin + '</h3>'
+        htmlString += 		'<h3 class="daily">' + "Summary" + " " + dataObj.daily.data[i].summary + '</h3>'
         htmlString += 		'<h3 class="daily">' + "chance of rain" + " " + dataObj.daily.data[i].precipProbability + '</h3>'
         htmlString += 		'<hr/>'
         htmlString += 	 '</div>'
