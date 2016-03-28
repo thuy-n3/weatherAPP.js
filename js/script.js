@@ -321,7 +321,7 @@ var successCallback = function(positionObject){
 	var latitude = positionObject.coords.latitude,
 		longitude = positionObject.coords.longitude
 
-	var fullUrl = baseUrl + "/" + latitude + "," + longitude
+	var fullUrl = baseUrl + "/" + latitude + "," + longitude + "?callback=?"
 	$.getJSON(fullUrl).then(
 		function(receivedWeatherData){
 
